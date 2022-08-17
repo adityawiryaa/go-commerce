@@ -1,0 +1,9 @@
+*.env
+*.exe
+
+/.vscode
+
+tmp
+buf
+
+.idea

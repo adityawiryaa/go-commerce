@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  api-go:
+    image: go-commerce/api:latest
+    container_name: commerce_api_go
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    environment:
+      APP_PORT: ':8001'
+      RPC_PORT: ':8002'
+      USER_PORT: ':5002'
+    ports:
+      - '8001:8001'
+      - '8002:8002'
+    restart: always

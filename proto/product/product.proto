@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package productPb;
+
+option go_package = "go-commerce/proto;product";
+
+import "google/api/annotations.proto";
+import "google/api/httpbody.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service ProductService {
+    rpc CreateProduct(CreateProductRequest) returns (Product) {
+      option (google.api.http) = {
+            post: "/product/create"
+            body: "*"
+        };
+    }
+    rpc GetListProduct(GetListProductRequest) returns (GetListProductResponse) {
+      option (google.api.http) = {
+            get: "/product/list"
+        };
+    }
+}
+
+message CreateProductRequest {
+  string name = 1;
+  int32 quantity = 2;
+  int64 price = 3;
+}
+
+message Product {
+  string id = 1;
+  string name = 2;
+  int32 quantity = 3;
+  int64 price = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+message GetListProductRequest {
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message GetListProductResponse {
+  repeated Product items = 1;
+  uint32 count = 2;
+}
